@@ -1,12 +1,12 @@
 # Bates
-System Level Test starter Kit (APIs and Web UI)
+A tool for testing APIs and Web UIs.
 
 ### Why
 It's a tool for running tests on:
-* APIs using Go's testing lib
+* APIs using Go's test library
 * End-to-End test through the web browser using Puppeteer and Jest.
 
-And deploys:
+And it's a tool for deployment of:
 * Jenkins to remote machine
 * The tests wrapped in a docker image to a Docker registry
 
