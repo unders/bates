@@ -14,7 +14,7 @@ A tool for testing APIs and Web UIs.
 ### Installation
 
 #### 1. Manually install these programs:
-* [Nvm] (https://github.com/creationix/nvm)
+* [Nvm](https://github.com/creationix/nvm)
 * Install Node: nvm install v10.2.1
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
