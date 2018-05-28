@@ -33,7 +33,10 @@ nvm use v10.2.1
 ### Doc
 
 #### Puppeteer
+* [Docs](https://jasmine.github.io/2.1/introduction.html)
 * [Getting started with Puppeteer](https://developers.google.com/web/tools/puppeteer/)
-* [https://www.lewuathe.com/using-puppeteer-in-typescript.html](https://www.lewuathe.com/using-puppeteer-in-typescript.htm)
+* [Using Puppeteer in TypeScript](https://www.lewuathe.com/using-puppeteer-in-typescript.htm)
+* [jest Puppeteer](https://github.com/smooth-code/jest-puppeteer)
+* [expect Puppeteer](https://github.com/smooth-code/jest-puppeteer/blob/master/packages/expect-puppeteer/README.md#api)
 
 
