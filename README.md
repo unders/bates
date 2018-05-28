@@ -10,12 +10,12 @@ A tool for testing APIs and Web UIs.
 * Deploy Jenkins to remote machine
 * Deploy the tests wrapped in a docker image to a Docker registry
 
-### Manually install
+### You must manually install these programs:
 * [Node](https://nodejs.org/en/download/)
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
 
-### Auto Install
+### And auto install the rest:
 ```
 make install
 ```
