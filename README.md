@@ -13,12 +13,12 @@ A tool for testing APIs and Web UIs.
 
 ### Installation
 
-#### 1. Manually install these:
+#### 1. Manually install these programs:
 * [Node](https://nodejs.org/en/download/)
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
 
-#### 2. Then auto install the rest:
+#### 2. Then install the rest with this command:
 ```
 make install
 ```
