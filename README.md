@@ -7,7 +7,6 @@ Bates is a tool for running tests on:
 * End-to-End test through the web browser using Puppeteer and Jest.
 
 ### Prerequisites
-Install:
 * [Node](https://nodejs.org/en/download/)
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
