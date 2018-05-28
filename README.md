@@ -2,6 +2,7 @@
 A tool for testing APIs and Web UIs.
 
 ### Why?
+
 #### Testing
 * Test APIs using Go's test library
 * End-to-End tests through the web browser using Puppeteer and Jest.
@@ -10,12 +11,14 @@ A tool for testing APIs and Web UIs.
 * Deploy Jenkins to remote machine
 * Deploy the tests wrapped in a docker image to a Docker registry
 
-### You must manually install these programs:
+### Installation
+
+#### 1. Manually install these:
 * [Node](https://nodejs.org/en/download/)
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
 
-### And auto install the rest:
+#### 2. Then auto install the rest:
 ```
 make install
 ```
