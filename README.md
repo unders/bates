@@ -14,7 +14,8 @@ A tool for testing APIs and Web UIs.
 ### Installation
 
 #### 1. Manually install these programs:
-* [Node](https://nodejs.org/en/download/)
+* [Nvm] (https://github.com/creationix/nvm)
+* Install Node: nvm install v10.2.1
 * [Go](https://golang.org/doc/install)
 * [Docker](https://docs.docker.com/install/)
 
@@ -22,5 +23,17 @@ A tool for testing APIs and Web UIs.
 ```
 make install
 ```
+
+### Troubleshoot
+Run command:
+```
+nvm use v10.2.1
+```
+
+### Doc
+
+#### Puppeteer
+* [Getting started with Puppeteer](https://developers.google.com/web/tools/puppeteer/)
+* [https://www.lewuathe.com/using-puppeteer-in-typescript.html](https://www.lewuathe.com/using-puppeteer-in-typescript.htm)
 
 
