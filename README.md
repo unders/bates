@@ -6,6 +6,7 @@ A tool for testing APIs and Web UIs.
 * Fix bates Dockerfile
 * Fix bates deploy to Docker Hub
 * Fix so that one can run e2e test from commandline with a visible browser
+* Think about contract tests... do we need them?
 
 ### Why?
 

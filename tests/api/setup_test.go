@@ -6,6 +6,10 @@ import (
 	"flag"
 )
 
+func TestSetup(t *testing.T) {
+	t.Log("All API tests should be in sub folders")
+}
+
 func TestMain(m *testing.M) {
 	// flags must be duplicated in testdata/setup.go file
 	_ = flag.Bool("update", false, "update golden files")
