@@ -32,6 +32,9 @@ nvm use v10.2.1
 
 ### Doc
 
+#### API Testing
+* [Go testing](https://golang.org/pkg/testing/)
+
 #### Pact
 Consumer Driven Contracts
 * [Pact Go](https://github.com/pact-foundation/pact-go/)
