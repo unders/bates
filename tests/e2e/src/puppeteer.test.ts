@@ -1,6 +1,6 @@
 describe('Google', () => {
     beforeAll(async () => {
-        await page.goto('https://google.com')
+        await page.goto('https://google.com');
     });
 
 
@@ -8,7 +8,7 @@ describe('Google', () => {
         await expect(page).toMatch('google')
     });
 
-    it ('search should find "unders" when searching for: "github Anders Törnqvist"', async() => {
+    it ('search should find "unders" when searching for: "github Anders Törnqvist"', async () => {
         const el = await page.$('input[name="q"]');
         expect(el).not.toBeNull();
         if (el == null) {
@@ -20,7 +20,6 @@ describe('Google', () => {
         await page.waitForNavigation({ waitUntil: "networkidle2" });
         await page.waitFor("#bfoot");
         await expect(page).toMatch("unders");
-        // await page.screenshot({path: 'google.png'});
     }, 5000);
 
 });

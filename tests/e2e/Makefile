@@ -7,20 +7,31 @@ help:
 	@echo ""
 	@echo "Commands:"
 	@echo "    make install           # install dependencies"
-	@echo "    make test              # run tests"
+	@echo ""
+	@echo "    make test/all          # run all tests"
+	@echo "    make test/watch        # watch all tests"
+	@echo ""
 	@echo "    make tree              # list directories"
 	@echo ""
 
 .PHONY: install
 install:
-	@npm install -g typescript
 	@npm install
 
-
-.PHONY: test
-test:
+##
+## TEST
+##
+.PHONY: test/all
+test/all:
 	node_modules/.bin/jest
 
+.PHONY: test/watch
+test/watch:
+	node_modules/.bin/jest --watch
+
+##
+## TEST
+##
 .PHONY: tree
 tree:
 	tree -I node_modules

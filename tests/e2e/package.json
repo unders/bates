@@ -1,7 +1,7 @@
 {
-  "name": "web",
-  "version": "1.0.0",
-  "description": "UI testing",
+  "name": "e2e",
+  "version": "0.0.1",
+  "description": "e2e testing",
   "main": "index.js",
   "scripts": {
     "test": "test"
@@ -12,7 +12,7 @@
   },
   "keywords": [
     "test",
-    "end-to-end"
+    "e2e"
   ],
   "author": "anders.tornqvist@gmail.com",
   "license": "ISC",

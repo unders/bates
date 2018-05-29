@@ -32,11 +32,25 @@ nvm use v10.2.1
 
 ### Doc
 
+#### Pact
+Consumer Driven Contracts
+* [Pact Go](https://github.com/pact-foundation/pact-go/)
+* [Pact Docs](https://docs.pact.io/)
+* [Consumer driven contracts](https://martinfowler.com/articles/consumerDrivenContracts.html)
+
 #### Puppeteer
+Acceptance Tests
 * [Docs](https://jasmine.github.io/2.1/introduction.html)
 * [Getting started with Puppeteer](https://developers.google.com/web/tools/puppeteer/)
 * [Using Puppeteer in TypeScript](https://www.lewuathe.com/using-puppeteer-in-typescript.htm)
 * [jest Puppeteer](https://github.com/smooth-code/jest-puppeteer)
 * [expect Puppeteer](https://github.com/smooth-code/jest-puppeteer/blob/master/packages/expect-puppeteer/README.md#api)
+* [Puppeteer API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md)
+* [https://ropig.com/blog/end-end-tests-dont-suck-puppeteer/](https://ropig.com/blog/end-end-tests-dont-suck-puppeteer/)
+* [testing-your-react-app-with-puppeteer-and-jest](https://blog.bitsrc.io/testing-your-react-app-with-puppeteer-and-jest-c72b3dfcde59)
+
+#### Cypress
+Puppeteer alternative
+* https://www.cypress.io/
 
 
