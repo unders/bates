@@ -1,6 +1,12 @@
 # Bates
 A tool for testing APIs and Web UIs.
 
+## TODOs
+* Fix Jenkins deploy
+* Fix bates Dockerfile
+* Fix bates deploy to Docker Hub
+* Fix so that one can run e2e test from commandline with a visible browser
+
 ### Why?
 
 #### Testing
