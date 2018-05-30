@@ -30,13 +30,24 @@ logout:
 
 .PHONY: build
 build:
+	mkdir -p dist
+	cp ../../Makefile dist
+	cp -R ../../tests dist
+	rm -rf dist/tests/e2e/node_modules
 	docker build -f Dockerfile -t $(IMAGE) .
+	rm -rf dist
 
 .PHONY: check
 check:
-	@docker run -d $(IMAGE) node -v
-	@echo -n output:
-	@docker ps -lq | xargs docker logs
+#	docker run -d $(IMAGE) node -v
+#	@docker ps -lq | xargs docker logs
+#	docker run -d $(IMAGE) go version
+#	@docker ps -lq | xargs docker logs
+#	docker run -d $(IMAGE) ls -la src/github.com/unders/bates
+#	@docker ps -lq | xargs docker logs
+#	docker run -d $(IMAGE) ls -la src/github.com/unders/bates/tests
+#	@docker ps -lq | xargs docker logs
+	docker run $(IMAGE) make test/e2e
 
 .PHONY: push
 push: build check

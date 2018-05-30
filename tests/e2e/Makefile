@@ -16,7 +16,7 @@ help:
 
 .PHONY: install
 install:
-	@npm install
+	npm install
 
 ##
 ## TEST

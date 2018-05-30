@@ -18,7 +18,7 @@ help:
 
 .PHONY: install
 install:
-	go get -u golang.org/x/vgo
+	go get golang.org/x/vgo
 
 ##
 ## TEST
