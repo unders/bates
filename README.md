@@ -2,8 +2,8 @@
 A tool for testing APIs and Web UIs.
 
 ## TODOs
-* Fix Jenkins deploy
 * Fix bates Dockerfile
+* Fix Jenkins deploy
 * Fix bates deploy to Docker Hub
 * Fix so that one can run e2e test from commandline with a visible browser
 * Think about contract tests... do we need them?
@@ -58,6 +58,9 @@ Acceptance Tests
 * [Puppeteer API](https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md)
 * [https://ropig.com/blog/end-end-tests-dont-suck-puppeteer/](https://ropig.com/blog/end-end-tests-dont-suck-puppeteer/)
 * [testing-your-react-app-with-puppeteer-and-jest](https://blog.bitsrc.io/testing-your-react-app-with-puppeteer-and-jest-c72b3dfcde59)
+
+#### Chromedp
+* [chromedp](https://github.com/chromedp/examples)
 
 #### Cypress
 Puppeteer alternative
