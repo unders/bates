@@ -13,6 +13,11 @@ BASE_REMOTE_IMAGE=$(DOCKER_USER)/$(BASE_IMAGE)
 EXT_IMAGE=$(PROG):$(VERSION)-tests-external-chrome
 EXT_REMOTE_IMAGE=$(DOCKER_USER)/$(EXT_IMAGE)
 
+##
+## GOSLIM
+GOSLIM_IMAGE=$(PROG):$(VERSION)-tests-goslim
+GOSLIM_REMOTE_IMAGE=$(DOCKER_USER)/$(GOSLIM_IMAGE)
+
 .PHONY: help
 help:
 	@echo ""
@@ -30,8 +35,12 @@ help:
 	@echo "    make ext/pull         # pull Docker image $(EXT_REMOTE_IMAGE) from registry"
 	@echo "    make ext/check        # check that Docker image $(EXT_IMAGE) works"
 	@echo ""
-	@echo "    make open              # open bates registry in browser"
-	@echo "    make tree              # list directories"
+	@echo "    make goslim/build     # build Docker file"
+	@echo "    make goslim/push      # push Docker image $(GOSLIM_REMOTE_IMAGE) to registry"
+	@echo "    make goslim/pull      # pull Docker image $(GOSLIM_REMOTE_IMAGE) from registry"
+	@echo "    make goslim/check     # check that Docker image $(GOSLIM_IMAGE) works"
+	@echo ""
+	@echo "    make open              # open bates registry in browser: $(WEB)"
 	@echo ""
 
 
@@ -101,11 +110,34 @@ ext/pull:
 ##
 ## EXT
 
+##
+## GOSLIM
+.PHONY: goslim/build
+goslim/build:
+	mkdir -p dist
+	cp ../../Makefile dist
+	cp -R ../../tests dist
+	rm -rf dist/tests/e2e/node_modules
+	docker build -f Dockerfile.goslim.docker -t $(GOSLIM_IMAGE) .
+	rm -rf dist
+
+.PHONY: goslim/check
+goslim/check:
+	docker run $(GOSLIM_IMAGE) make test/api
+
+.PHONY: goslim/push
+goslim/push: goslim/build goslim/check
+	docker tag $(GOSLIM_IMAGE) $(GOSLIM_REMOTE_IMAGE)
+	docker push $(GOSLIM_REMOTE_IMAGE)
+
+.PHONY: goslim/pull
+goslim/pull:
+	docker pull $(GOSLIM_REMOTE_IMAGE)
+##
+## GOSLIM
+
 
 .PHONY: open
 open:
 	open $(WEB)
 
-.PHONY: tree
-tree:
-	tree -I node_modules

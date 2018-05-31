@@ -7,6 +7,7 @@ help:
 	@echo ""
 	@echo "Commands:"
 	@echo "    make install           # install dependencies"
+	@echo "    make api/install       # install api dependencies"
 	@echo ""
 	@echo "    make test/all          # run all tests"
 	@echo "    make test/e2e          # run all api tests"
@@ -19,6 +20,10 @@ help:
 .PHONY: install
 install:
 	@cd tests/e2e && make install
+	@cd tests/api && make install
+
+.PHONY: api/install
+api/install:
 	@cd tests/api && make install
 
 .PHONY: test/all
