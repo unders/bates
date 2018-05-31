@@ -9,8 +9,14 @@ MAINTAINER unders <anders.tornqvist@gmail.com>
 RUN apt-get update && apt-get install -y --no-install-recommends \
 		g++ \
 		gcc \
-		libc6-dev \
 		make \
+		libc6 libc6-dev \
+		libx11-xcb1 libxcomposite1 libxcursor1 \
+		libxdamage1 libasound2 libatk1.0-0 libcairo2 libcups2  libdbus-1-3 libexpat1 \
+        libfontconfig1 libgcc1  libgconf-2-4  libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 \
+        libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 \
+        libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 \
+        ca-certificates fonts-liberation libappindicator1 libnss3 \
 		tree \
 		pkg-config \
 	&& rm -rf /var/lib/apt/lists/*
@@ -53,13 +59,22 @@ ENV GOPATH /go
 ENV BATES $GOPATH/src/github.com/unders/bates
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
-WORKDIR $GOPATH
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" /home/appuser/Downloads  && \
+    mkdir -p $GOPATH/src/github.com/unders/bates/tests && \
+    chmod -R 777 /home/appuser && chmod -R 777 "$GOPATH"
 
-RUN mkdir -p $GOPATH/src/github.com/unders/bates/tests
 COPY dist/Makefile $BATES
 COPY dist/tests $BATES/tests
-RUN chmod -R 777 "$GOPATH" && cd $BATES && make install
+RUN chmod -R 777 "$GOPATH"
+
+RUN groupadd -r appuser && useradd -r -g appuser -G audio,video appuser \
+    && chown -R appuser:appuser /home/appuser \
+    && chown -R appuser:appuser $BATES
+
+##  set Workdir and
+##  run everything after as non-privileged appuser
 WORKDIR $BATES
+USER appuser
+RUN make install
 
 CMD ["node", "-v"]

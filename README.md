@@ -2,7 +2,7 @@
 A tool for testing APIs and Web UIs.
 
 ## TODOs
-* Fix bates Dockerfile
+* Fix chromium installation
 * Fix Jenkins deploy
 * Fix bates deploy to Docker Hub
 * Fix so that one can run e2e test from commandline with a visible browser
@@ -36,6 +36,10 @@ Run command:
 ```
 nvm use v10.2.1
 ```
+
+#### Doc
+* https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
+
 
 ### Doc
 

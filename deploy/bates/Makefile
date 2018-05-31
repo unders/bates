@@ -47,6 +47,7 @@ check:
 #	@docker ps -lq | xargs docker logs
 #	docker run -d $(IMAGE) ls -la src/github.com/unders/bates/tests
 #	@docker ps -lq | xargs docker logs
+	docker run $(IMAGE) make test/api
 	docker run $(IMAGE) make test/e2e
 
 .PHONY: push
