@@ -14,6 +14,11 @@ NOCHROME_IMAGE=$(PROG):$(VERSION)-nochrome
 NOCHROME_REMOTE_IMAGE=$(DOCKER_USER)/$(NOCHROME_IMAGE)
 
 ##
+## CHROME
+CHROME_IMAGE=$(PROG):$(VERSION)-chrome
+CHROME_REMOTE_IMAGE=$(DOCKER_USER)/$(CHROME_IMAGE)
+
+##
 ## EMBEDDED
 EMBEDDED_IMAGE=$(PROG):$(VERSION)-embedded-chrome
 EMBEDDED_REMOTE_IMAGE=$(DOCKER_USER)/$(EMBEDDED_IMAGE)
@@ -40,10 +45,20 @@ help:
 	@echo "    make nochrome/push         # push Docker image $(NOCHROME_REMOTE_IMAGE) to registry"
 	@echo "    make nochrome/pull         # pull Docker image $(NOCHROME_REMOTE_IMAGE) from registry"
 	@echo ""
+	@echo "    make chrome/build          # build Docker image $(CHROME_IMAGE)"
+	@echo "    make chrome/check          # check that Docker image $(CHROME_IMAGE) works"
+	@echo "    make chrome/push           # push Docker image $(CHROME_REMOTE_IMAGE) to registry"
+	@echo "    make chrome/pull           # pull Docker image $(CHROME_REMOTE_IMAGE) from registry"
+	@echo ""
 	@echo "    make embedded/build        # build Docker image $(EMBEDDED_IMAGE)"
 	@echo "    make embedded/check        # check that Docker image $(EMBEDDED_IMAGE) works"
 	@echo "    make embedded/push         # push Docker image $(EMBEDDED_REMOTE_IMAGE) to registry"
 	@echo "    make embedded/pull         # pull Docker image $(EMBEDDED_REMOTE_IMAGE) from registry"
+	@echo ""
+	@echo "    make external/build        # build Docker image $(EXTERNAL_IMAGE)"
+	@echo "    make external/check        # check that Docker image $(EXTERNAL_IMAGE) works"
+	@echo "    make external/push         # push Docker image $(EXTERNAL_REMOTE_IMAGE) to registry"
+	@echo "    make external/pull         # pull Docker image $(EXTERNAL_REMOTE_IMAGE) from registry"
 	@echo ""
 	@echo "    make open                  # open bates registry in browser"
 	@echo "    make tree                  # list directories"
@@ -104,6 +119,28 @@ nochrome/pull:
 ## NOCHROME
 
 ##
+## CHROME
+.PHONY: chrome/build
+chrome/build:
+	docker build -f Dockerfile.full.chrome.docker -t $(CHROME_IMAGE) .
+
+.PHONY: chrome/check
+chrome/check:
+	docker run $(CHROME_IMAGE) node -v
+	docker run $(CHROME_IMAGE) go version
+
+.PHONY: chrome/push
+chrome/push: chrome/build chrome/check
+	docker tag $(CHROME_IMAGE) $(CHROME_REMOTE_IMAGE)
+	docker push $(CHROME_REMOTE_IMAGE)
+
+.PHONY: chrome/pull
+chrome/pull:
+	docker pull $(CHROME_REMOTE_IMAGE)
+##
+## CHROME
+
+##
 ## EMBEDDED
 .PHONY: embedded/build
 embedded/build:
@@ -122,6 +159,28 @@ embedded/push: embedded/build embedded/check
 .PHONY: embedded/pull
 embedded/pull:
 	docker pull $(EMBEDDED_REMOTE_IMAGE)
+##
+## EMBEDDED
+##
+
+## EXTERNAL
+.PHONY: external/build
+external/build:
+	docker build -f Dockerfile.chrome.user.docker -t $(EXTERNAL_IMAGE) .
+
+.PHONY: external/check
+external/check:
+	docker run $(EXTERNAL_IMAGE) node -v
+	docker run $(EXTERNAL_IMAGE) go version
+
+.PHONY: external/push
+external/push: external/build external/check
+	docker tag $(EXTERNAL_IMAGE) $(EXTERNAL_REMOTE_IMAGE)
+	docker push $(EXTERNAL_REMOTE_IMAGE)
+
+.PHONY: external/pull
+external/pull:
+	docker pull $(EXTERNAL_REMOTE_IMAGE)
 ##
 ## EMBEDDED
 
