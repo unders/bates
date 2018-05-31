@@ -14,9 +14,14 @@ NOCHROME_IMAGE=$(PROG):$(VERSION)-nochrome
 NOCHROME_REMOTE_IMAGE=$(DOCKER_USER)/$(NOCHROME_IMAGE)
 
 ##
-## USER
-USER_IMAGE=$(PROG):$(VERSION)-user
-USER_REMOTE_IMAGE=$(DOCKER_USER)/$(USER_IMAGE)
+## EMBEDDED
+EMBEDDED_IMAGE=$(PROG):$(VERSION)-embedded-chrome
+EMBEDDED_REMOTE_IMAGE=$(DOCKER_USER)/$(EMBEDDED_IMAGE)
+
+##
+## EXTERNAL
+EXTERNAL_IMAGE=$(PROG):$(VERSION)-external-chrome
+EXTERNAL_REMOTE_IMAGE=$(DOCKER_USER)/$(EXTERNAL_IMAGE)
 
 .PHONY: help
 help:
@@ -35,10 +40,10 @@ help:
 	@echo "    make nochrome/push         # push Docker image $(NOCHROME_REMOTE_IMAGE) to registry"
 	@echo "    make nochrome/pull         # pull Docker image $(NOCHROME_REMOTE_IMAGE) from registry"
 	@echo ""
-	@echo "    make user/build            # build Docker image $(USER_IMAGE)"
-	@echo "    make user/check            # check that Docker image $(USER_IMAGE) works"
-	@echo "    make user/push             # push Docker image $(USER_REMOTE_IMAGE) to registry"
-	@echo "    make user/pull             # pull Docker image $(USER_REMOTE_IMAGE) from registry"
+	@echo "    make embedded/build        # build Docker image $(EMBEDDED_IMAGE)"
+	@echo "    make embedded/check        # check that Docker image $(EMBEDDED_IMAGE) works"
+	@echo "    make embedded/push         # push Docker image $(EMBEDDED_REMOTE_IMAGE) to registry"
+	@echo "    make embedded/pull         # pull Docker image $(EMBEDDED_REMOTE_IMAGE) from registry"
 	@echo ""
 	@echo "    make open                  # open bates registry in browser"
 	@echo "    make tree                  # list directories"
@@ -99,26 +104,26 @@ nochrome/pull:
 ## NOCHROME
 
 ##
-## USER
-.PHONY: user/build
-user/build:
-	docker build -f Dockerfile.nochrome.user.docker -t $(USER_IMAGE) .
+## EMBEDDED
+.PHONY: embedded/build
+embedded/build:
+	docker build -f Dockerfile.nochrome.user.docker -t $(EMBEDDED_IMAGE) .
 
-.PHONY: user/check
-user/check:
-	docker run $(USER_IMAGE) node -v
-	docker run $(USER_IMAGE) go version
+.PHONY: embedded/check
+embedded/check:
+	docker run $(EMBEDDED_IMAGE) node -v
+	docker run $(EMBEDDED_IMAGE) go version
 
-.PHONY: user/push
-user/push: user/build user/check
-	docker tag $(USER_IMAGE) $(USER_REMOTE_IMAGE)
-	docker push $(USER_REMOTE_IMAGE)
+.PHONY: embedded/push
+embedded/push: embedded/build embedded/check
+	docker tag $(EMBEDDED_IMAGE) $(EMBEDDED_REMOTE_IMAGE)
+	docker push $(EMBEDDED_REMOTE_IMAGE)
 
-.PHONY: user/pull
-user/pull:
-	docker pull $(USER_REMOTE_IMAGE)
+.PHONY: embedded/pull
+embedded/pull:
+	docker pull $(EMBEDDED_REMOTE_IMAGE)
 ##
-## NOCHROME
+## EMBEDDED
 
 
 .PHONY: open

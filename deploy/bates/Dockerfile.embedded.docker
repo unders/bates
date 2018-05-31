@@ -1,4 +1,4 @@
-FROM unders/bates:1-user
+FROM unders/bates:1-embedded-chrome
 MAINTAINER unders <anders.tornqvist@gmail.com>
 
 ##
