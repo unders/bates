@@ -1,9 +1,12 @@
 PROG=bates
 VERSION=1
-IMAGE=$(PROG):$(VERSION)
 DOCKER_USER=unders
-REMOTE_IMAGE=$(DOCKER_USER)/$(IMAGE)
 WEB=https://hub.docker.com/r/unders/bates/
+
+##
+## BASE
+BASE_IMAGE=$(PROG):$(VERSION)-base
+BASE_REMOTE_IMAGE=$(DOCKER_USER)/$(BASE_IMAGE)
 
 .PHONY: help
 help:
@@ -12,13 +15,15 @@ help:
 	@echo "    make login             # login to a Docker registry"
 	@echo "    make logout            # logout from a Docker registry"
 	@echo ""
-	@echo "    make build             # build Docker file"
-	@echo "    make push              # push Docker image $(REMOTE_IMAGE) to registry"
-	@echo "    make open              # open $(REMOTE_IMAGE) registry in browser"
-	@echo "    make pull              # pull Docker image $(REMOTE_IMAGE) from registry"
-	@echo "    make check             # check that Docker image $(IMAGE) works"
+	@echo "    make base/build        # build Docker file"
+	@echo "    make base/push         # push Docker image $(BASE_REMOTE_IMAGE) to registry"
+	@echo "    make base/pull         # pull Docker image $(BASE_REMOTE_IMAGE) from registry"
+	@echo "    make base/check        # check that Docker image $(BASE_IMAGE) works"
+	@echo ""
+	@echo "    make open              # open bates registry in browser"
 	@echo "    make tree              # list directories"
 	@echo ""
+
 
 .PHONY: login
 login:
@@ -28,40 +33,39 @@ login:
 logout:
 	docker logout
 
-.PHONY: build
-build:
+
+##
+## BASE
+.PHONY: base/build
+base/build:
 	mkdir -p dist
 	cp ../../Makefile dist
 	cp -R ../../tests dist
 	rm -rf dist/tests/e2e/node_modules
-	docker build -f Dockerfile -t $(IMAGE) .
+	docker build -f Dockerfile -t $(BASE_IMAGE) .
 	rm -rf dist
 
-.PHONY: check
-check:
-#	docker run -d $(IMAGE) node -v
-#	@docker ps -lq | xargs docker logs
-#	docker run -d $(IMAGE) go version
-#	@docker ps -lq | xargs docker logs
-#	docker run -d $(IMAGE) ls -la src/github.com/unders/bates
-#	@docker ps -lq | xargs docker logs
-#	docker run -d $(IMAGE) ls -la src/github.com/unders/bates/tests
-#	@docker ps -lq | xargs docker logs
-	docker run $(IMAGE) make test/api
-	docker run $(IMAGE) make test/e2e
+.PHONY: base/check
+base/check:
+	docker run $(BASE_IMAGE) make test/api
+	docker run $(BASE_IMAGE) make test/e2e
 
-.PHONY: push
-push: build check
-	docker tag $(IMAGE) $(REMOTE_IMAGE)
-	docker push $(REMOTE_IMAGE)
+.PHONY: base/push
+base/push: base/build base/check
+	docker tag $(BASE_IMAGE) $(BASE_REMOTE_IMAGE)
+	docker push $(BASE_REMOTE_IMAGE)
+
+
+.PHONY: base/pull
+basepull:
+	docker pull $(BASE_REMOTE_IMAGE)
+##
+## BASE
+
 
 .PHONY: open
 open:
 	open $(WEB)
-
-.PHONY: pull
-pull:
-	docker pull $(REMOTE_IMAGE)
 
 .PHONY: tree
 tree:

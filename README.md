@@ -54,6 +54,8 @@ Consumer Driven Contracts
 
 #### Puppeteer
 Acceptance Tests
+* [google-chrome-unstable](https://peter.sh/experiments/chromium-command-line-switches/)
+* [jest-environment-puppeteer](https://github.com/smooth-code/jest-puppeteer/tree/master/packages/jest-environment-puppeteer)
 * [Docs](https://jasmine.github.io/2.1/introduction.html)
 * [Getting started with Puppeteer](https://developers.google.com/web/tools/puppeteer/)
 * [Using Puppeteer in TypeScript](https://www.lewuathe.com/using-puppeteer-in-typescript.htm)
