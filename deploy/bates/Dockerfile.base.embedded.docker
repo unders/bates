@@ -1,0 +1,19 @@
+FROM unders/bates:1-user
+MAINTAINER unders <anders.tornqvist@gmail.com>
+
+##
+## ADD TEST CODE
+ENV BATES $GOPATH/src/github.com/unders/bates
+
+RUN mkdir -p $BATES/tests && chmod -R 777 "$GOPATH"
+COPY dist/Makefile $BATES
+COPY dist/tests $BATES/tests
+RUN chmod -R 777 "$GOPATH"
+WORKDIR $BATES
+
+## run everything as non-privileged appuser
+USER appuser
+RUN make install
+
+CMD ["node", "-v"]
+

@@ -42,7 +42,7 @@ base/build:
 	cp ../../Makefile dist
 	cp -R ../../tests dist
 	rm -rf dist/tests/e2e/node_modules
-	docker build -f Dockerfile -t $(BASE_IMAGE) .
+	docker build -f Dockerfile.base.embedded.docker -t $(BASE_IMAGE) .
 	rm -rf dist
 
 .PHONY: base/check
@@ -57,7 +57,7 @@ base/push: base/build base/check
 
 
 .PHONY: base/pull
-basepull:
+base/pull:
 	docker pull $(BASE_REMOTE_IMAGE)
 ##
 ## BASE

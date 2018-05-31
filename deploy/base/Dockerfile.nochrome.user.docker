@@ -1,0 +1,14 @@
+FROM unders/bates:1-nochrome
+MAINTAINER unders <anders.tornqvist@gmail.com>
+
+##
+## Add appuser
+##
+RUN mkdir -p /home/appuser/Downloads \
+    && chmod -R 777 /home/appuser \
+    && groupadd -r appuser && useradd -r -g appuser -G audio,video appuser \
+    && chown -R appuser:appuser /home/appuser
+##
+## Add appuser
+##
+
