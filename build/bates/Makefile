@@ -53,6 +53,7 @@ base/build:
 	mkdir -p dist
 	cp ../../Makefile dist
 	cp -R ../../tests dist
+	cp -f  dist/tests/e2e/support/jest-puppeteer.config.js dist/tests/e2e/jest-puppeteer.config.js
 	rm -rf dist/tests/e2e/node_modules
 	docker build -f Dockerfile.embedded.docker -t $(BASE_IMAGE) .
 	rm -rf dist
