@@ -39,6 +39,7 @@ nvm use v10.2.1
 
 #### Doc
 * https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
+* https://peter.sh/experiments/chromium-command-line-switches/
 
 
 ### Doc

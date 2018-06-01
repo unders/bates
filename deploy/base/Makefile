@@ -28,11 +28,6 @@ EMBEDDED_REMOTE_IMAGE=$(DOCKER_USER)/$(EMBEDDED_IMAGE)
 EXTERNAL_IMAGE=$(PROG):$(VERSION)-external-chrome
 EXTERNAL_REMOTE_IMAGE=$(DOCKER_USER)/$(EXTERNAL_IMAGE)
 
-##
-## GOSLIM
-GOSLIM_IMAGE=$(PROG):$(VERSION)-goslim
-GOSLIM_REMOTE_IMAGE=$(DOCKER_USER)/$(GOSLIM_IMAGE)
-
 .PHONY: help
 help:
 	@echo ""
@@ -64,11 +59,6 @@ help:
 	@echo "    make external/check        # check that Docker image $(EXTERNAL_IMAGE) works"
 	@echo "    make external/push         # push Docker image $(EXTERNAL_REMOTE_IMAGE) to registry"
 	@echo "    make external/pull         # pull Docker image $(EXTERNAL_REMOTE_IMAGE) from registry"
-	@echo ""
-	@echo "    make goslim/build          # build Docker image $(GOSLIM_IMAGE)"
-	@echo "    make goslim/check          # check that Docker image $(GOSLIM_IMAGE) works"
-	@echo "    make goslim/push           # push Docker image $(GOSLIM_REMOTE_IMAGE) to registry"
-	@echo "    make goslim/pull           # pull Docker image $(GOSLIM_REMOTE_IMAGE) from registry"
 	@echo ""
 	@echo "    make open                  # open bates registry in browser"
 	@echo "    make tree                  # list directories"
@@ -173,7 +163,9 @@ embedded/pull:
 ## EMBEDDED
 ##
 
+##
 ## EXTERNAL
+##
 .PHONY: external/build
 external/build:
 	docker build -f Dockerfile.chrome.user.docker -t $(EXTERNAL_IMAGE) .
@@ -192,31 +184,8 @@ external/push: external/build external/check
 external/pull:
 	docker pull $(EXTERNAL_REMOTE_IMAGE)
 ##
-## EMBEDDED
-
-## GOSLIM
-.PHONY: goslim/build
-goslim/build:
-	docker build -f Dockerfile.goslim.docker -t $(GOSLIM_IMAGE) .
-
-.PHONY: goslim/check
-goslim/check:
-	# validate external chrome...
-	docker run $(GOSLIM_IMAGE) go version
-	docker run --shm-size=1gb --cap-add=SYS_ADMIN $(GOSLIM_IMAGE) \
-	chromium-browser --no-sandbox --headless --disable-gpu --disable-setuid-sandbox
-
-.PHONY: goslim/push
-goslim/push: goslim/build #goslim/check
-	docker tag $(GOSLIM_IMAGE) $(GOSLIM_REMOTE_IMAGE)
-	docker push $(GOSLIM_REMOTE_IMAGE)
-
-.PHONY: goslim/pull
-goslim/pull:
-	docker pull $(GOSLIM_REMOTE_IMAGE)
+## EXTERNAL
 ##
-## GOSLIM
-
 
 .PHONY: open
 open:
