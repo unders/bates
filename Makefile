@@ -15,6 +15,7 @@ help:
 	@echo "    make test/contracts    # run all contract tests"
 	@echo ""
 	@echo "    make tree              # list directories"
+	@echo "    make log               # show git log"
 	@echo ""
 
 .PHONY: install
@@ -40,4 +41,8 @@ test/api:
 .PHONY: tree
 tree:
 	tree -I node_modules
+
+.PHONY: log
+log: ## show git log
+	@git log --graph --oneline --decorate
 
