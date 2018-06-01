@@ -1,5 +1,5 @@
 PROG=bates
-VERSION=1
+VERSION=2
 DOCKER_USER=unders
 WEB=https://hub.docker.com/r/unders/bates/
 
@@ -12,11 +12,6 @@ BASE_REMOTE_IMAGE=$(DOCKER_USER)/$(BASE_IMAGE)
 ## EXT
 EXT_IMAGE=$(PROG):$(VERSION)-tests-external-chrome
 EXT_REMOTE_IMAGE=$(DOCKER_USER)/$(EXT_IMAGE)
-
-##
-## GOSLIM
-GOSLIM_IMAGE=$(PROG):$(VERSION)-tests-goslim
-GOSLIM_REMOTE_IMAGE=$(DOCKER_USER)/$(GOSLIM_IMAGE)
 
 .PHONY: help
 help:
@@ -34,11 +29,6 @@ help:
 	@echo "    make ext/push         # push Docker image $(EXT_REMOTE_IMAGE) to registry"
 	@echo "    make ext/pull         # pull Docker image $(EXT_REMOTE_IMAGE) from registry"
 	@echo "    make ext/check        # check that Docker image $(EXT_IMAGE) works"
-	@echo ""
-	@echo "    make goslim/build     # build Docker file"
-	@echo "    make goslim/push      # push Docker image $(GOSLIM_REMOTE_IMAGE) to registry"
-	@echo "    make goslim/pull      # pull Docker image $(GOSLIM_REMOTE_IMAGE) from registry"
-	@echo "    make goslim/check     # check that Docker image $(GOSLIM_IMAGE) works"
 	@echo ""
 	@echo "    make open              # open bates registry in browser: $(WEB)"
 	@echo ""
