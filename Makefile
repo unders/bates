@@ -10,7 +10,8 @@ help:
 	@echo "    make api/install       # install api dependencies"
 	@echo ""
 	@echo "    make test/all          # run all tests"
-	@echo "    make test/e2e          # run all api tests"
+	@echo "    make test/e2e          # run all e2e tests"
+	@echo "    make test/e2e/show     # run all e2e tests in a visible browser"
 	@echo "    make test/api          # run all api tests"
 	@echo "    make test/contracts    # run all contract tests"
 	@echo ""
@@ -33,6 +34,10 @@ test/all: test/e2e test/api
 .PHONY: test/e2e
 test/e2e:
 	@cd tests/e2e && make test/all
+
+.PHONY: test/e2e/show
+test/e2e/show:
+	@cd tests/e2e && make test/all/show
 
 .PHONY: test/api
 test/api:

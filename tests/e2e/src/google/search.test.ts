@@ -4,11 +4,11 @@ describe('Google', () => {
     });
 
 
-    it('should be on page: "google.com"', async () => {
+    test('should be on page: "google.com"', async () => {
         await expect(page).toMatch('google')
-    });
+    }, 5000);
 
-    it ('search should find "unders" when searching for: "github Anders Törnqvist"', async () => {
+    test('search should find "unders" when searching for: "github Anders Törnqvist"', async () => {
         const el = await page.$('input[name="q"]');
         expect(el).not.toBeNull();
         if (el == null) {
@@ -20,6 +20,6 @@ describe('Google', () => {
         await page.waitForNavigation({ waitUntil: "networkidle2" });
         await page.waitFor("#bfoot");
         await expect(page).toMatch("unders");
-    }, 5000);
+    }, 10000);
 
 });

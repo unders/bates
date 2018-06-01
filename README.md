@@ -52,6 +52,9 @@ Consumer Driven Contracts
 * [Pact Docs](https://docs.pact.io/)
 * [Consumer driven contracts](https://martinfowler.com/articles/consumerDrivenContracts.html)
 
+#### Headless Chrome
+* [headless chrome](https://developers.google.com/web/updates/2017/04/headless-chrome)
+
 #### Puppeteer
 Acceptance Tests
 * [google-chrome-unstable](https://peter.sh/experiments/chromium-command-line-switches/)

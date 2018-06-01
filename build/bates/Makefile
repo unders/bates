@@ -2,6 +2,7 @@ PROG=bates
 VERSION=2
 DOCKER_USER=unders
 WEB=https://hub.docker.com/r/unders/bates/
+GIT_REPO=https://github.com/unders/bates
 
 ##
 ## BASE
@@ -25,11 +26,13 @@ help:
 	@echo "    make base/pull         # pull Docker image $(BASE_REMOTE_IMAGE) from registry"
 	@echo "    make base/check        # check that Docker image $(BASE_IMAGE) works"
 	@echo ""
-	@echo "    make ext/build        # build Docker file"
-	@echo "    make ext/push         # push Docker image $(EXT_REMOTE_IMAGE) to registry"
-	@echo "    make ext/pull         # pull Docker image $(EXT_REMOTE_IMAGE) from registry"
-	@echo "    make ext/check        # check that Docker image $(EXT_IMAGE) works"
+	@echo "    make ext/build         # build Docker file"
+	@echo "    make ext/push          # push Docker image $(EXT_REMOTE_IMAGE) to registry"
+	@echo "    make ext/pull          # pull Docker image $(EXT_REMOTE_IMAGE) from registry"
+	@echo "    make ext/check         # check that Docker image $(EXT_IMAGE) works"
 	@echo ""
+	@echo "    make git/tag           # set git tag v$(VERSION) and push to repo"
+	@echo "    make git/open          # sopen bates git repo in browser: $(GIT_REPO)"
 	@echo "    make open              # open bates registry in browser: $(WEB)"
 	@echo ""
 
@@ -100,32 +103,15 @@ ext/pull:
 ##
 ## EXT
 
-##
-## GOSLIM
-.PHONY: goslim/build
-goslim/build:
-	mkdir -p dist
-	cp ../../Makefile dist
-	cp -R ../../tests dist
-	rm -rf dist/tests/e2e/node_modules
-	docker build -f Dockerfile.goslim.docker -t $(GOSLIM_IMAGE) .
-	rm -rf dist
 
-.PHONY: goslim/check
-goslim/check:
-	docker run $(GOSLIM_IMAGE) make test/api
+.PHONY: git/tag
+git/tag:
+	git tag v$(VERSION) master
+	git push origin v$(VERSION)
 
-.PHONY: goslim/push
-goslim/push: goslim/build goslim/check
-	docker tag $(GOSLIM_IMAGE) $(GOSLIM_REMOTE_IMAGE)
-	docker push $(GOSLIM_REMOTE_IMAGE)
-
-.PHONY: goslim/pull
-goslim/pull:
-	docker pull $(GOSLIM_REMOTE_IMAGE)
-##
-## GOSLIM
-
+.PHONY: git/open
+git/open:
+	open $(GIT_REPO)
 
 .PHONY: open
 open:
